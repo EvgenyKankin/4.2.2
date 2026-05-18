@@ -1,12 +1,17 @@
 import './App.css'
+import Container from './components/Container/Container'
+import Header from './components/Header/Header'
+import ProductsList from './components/ProductsList/ProductsList'
 
 function App() {
 
   return (
-    <>
-      <p>Hello World</p>
-      <p>test</p>
-    </>
+    <div className="wrapper">
+      <Header />
+      <Container>
+        <ProductsList />
+      </Container>
+    </div>
   )
 }
 
