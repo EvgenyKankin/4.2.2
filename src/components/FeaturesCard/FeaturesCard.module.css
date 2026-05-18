@@ -1,3 +1,4 @@
+/*
 .card {
   background-color: var(--mantine-color-body);
 }
@@ -27,4 +28,53 @@
 .icon {
   margin-right: 5px;
   color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-2));
+}
+*/
+
+.productCard {
+    width: 302px;
+    height: 412px;
+    border-radius: 24px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+}
+
+.productImg {
+    width: 276px;
+    height: 276px;
+    margin-top: 13px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cardTitle {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priceSection {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.counter {
+  width: 30px;
+  height: 30px;
+}
+
+.addCounterButton,
+.removeCounterButton {
+  width:30px;
+  height:30px;
+}
+
+.addToCartButton {
+  background-image: url('./src/assets/addToCart.svg');
+  width:204px;
+  height:44px;
+  border:none;
+  border-radius: 8px;
 }
