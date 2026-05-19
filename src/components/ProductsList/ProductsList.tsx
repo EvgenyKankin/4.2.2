@@ -1,43 +1,10 @@
 import { FeaturesCard } from '../FeaturesCard/FeaturesCard';
 import LoaderList from '../LoaderList/LoaderList';
 import classes from './ProductsList.module.css'
-import { useEffect, useState } from 'react';
-
-type Product = {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-    category: string;
-};
-
-
-
+import { useProducts } from '../ProductsContext/ProductsContext'
 
 function ProductsList() {
-    const [products, setProducts] = useState<Product[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState('');
-
-    useEffect(() => {
-        async function fetchProducts () {
-            try {
-                const response = await fetch ('https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json')
-
-                if (!response.ok) {
-                    throw new Error('Ошибка загрузки товаров');
-                }
-
-                const data: Product[] = await response.json();
-                setProducts(data);
-            } catch (error) {
-                setError('Не удалось загрузить товары');
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        fetchProducts();
-    },[]);
+    const {products, isLoading, error} = useProducts();
 
     if (isLoading) {
     return <LoaderList />
