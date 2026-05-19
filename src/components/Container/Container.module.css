@@ -1,16 +1,16 @@
 .container {
     background-color: #CED4DA;
     padding-top: 100px;
-    padding-left: 50px;
-    padding-right: 50px;
+    
 }
 
 .titleText {
-    font-family: Inter;
+    font-family: 'Inter';
     font-weight: 600;
     font-style: Semi Bold;
     font-size: 32px;
     line-height: 40px;
     letter-spacing: 0%;
     padding-bottom: 20px;
+    margin-left:80px;
 }

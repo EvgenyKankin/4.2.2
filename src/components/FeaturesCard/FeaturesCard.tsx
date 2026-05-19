@@ -1,4 +1,6 @@
+import addToCart from '../addToCart/addToCart';
 import classes from './FeaturesCard.module.css';
+import {useState} from 'react';
 
 type ProductCardProps = {
   name: string;
@@ -11,6 +13,8 @@ export function FeaturesCard({image, name, price}:ProductCardProps) {
   const [title, details] = (name || '').split (' - ');
   const [quant, unit] = (details || '').split (' ');
 
+  const [count, setCount] = useState<number>(1);
+
 
   return (
     <div className={classes.productCard}>
@@ -18,21 +22,21 @@ export function FeaturesCard({image, name, price}:ProductCardProps) {
       
       <div className={classes.cardTitle}>
         <div className ={classes.titleText}>
-          <p>{title}</p>
-          <p>{quant}</p>
-          <p>{unit}</p>
+          <p className={classes.title}>{title}</p>
+          <p className={classes.quant}>{quant}</p>
+          <p className={classes.unit}>{unit}</p>
         </div>
 
         <div className={classes.counterContainer}>
-          <button className ={classes.plusButton}></button>
-          <div className={classes.counter}><p>1</p></div>
-          <button className ={classes.minusButton}></button>
+          <button className ={classes.plusButton} onClick={()=>setCount(count+1)}></button>
+          <div className={classes.counter}>{count}</div>
+          <button className ={classes.minusButton} onClick={()=>setCount(count-1)}></button>
         </div>
       </div>
       
       <div className={classes.priceSection}>
-        <p>$ {price}</p>
-        <button className={classes.addToCartButton}></button>
+        <p className={classes.price}>$ {price}</p>
+        <button className={classes.addToCartButton} onClick={()=>addToCart(count, title)}></button>
       </div>
     </div>
   );
