@@ -4,9 +4,12 @@ import App from './App.tsx'
 import '@mantine/core/styles.css'
 import './reset.css'
 import { ProductsProvider } from './components/ProductsContext/ProductsContext.tsx'
+import { CartProvider } from './components/addToCart/addToCart.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <ProductsProvider>
-    <App />
+    <CartProvider>
+      <App />
+    </CartProvider>
   </ProductsProvider>,
 )

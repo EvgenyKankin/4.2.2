@@ -1,8 +1,8 @@
-import addToCart from '../addToCart/addToCart';
+import { useCart } from '../addToCart/addToCart';
 import classes from './FeaturesCard.module.css';
 import {useState} from 'react';
 
-type Product = {
+export type Product = {
   id : number
   name: string;
   price: number;
@@ -19,7 +19,8 @@ export function FeaturesCard({product, }:ProductCardProps) {
   const [title, details] = (product.name || '').split (' - ');
   const [quant, unit] = (details || '').split (' ');
 
-  const [count, setCount] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(1);
+  const { addToCart } = useCart();
 
 
   return (
@@ -34,15 +35,15 @@ export function FeaturesCard({product, }:ProductCardProps) {
         </div>
 
         <div className={classes.counterContainer}>
-          <button className ={classes.plusButton} onClick={()=>setCount(count+1)}></button>
-          <div className={classes.counter}>{count}</div>
-          <button className ={classes.minusButton} onClick={()=>setCount(count-1)}></button>
+          <button className ={classes.plusButton} onClick={()=>setQuantity((prev)=>(prev + 1))}></button>
+          <div className={classes.counter}>{quantity}</div>
+          <button className ={classes.minusButton} onClick={()=>setQuantity((prev)=>(prev > 1 ? prev - 1 : 1))}></button>
         </div>
       </div>
       
       <div className={classes.priceSection}>
         <p className={classes.price}>$ {product.price}</p>
-        <button className={classes.addToCartButton} onClick={()=>addToCart(product, count)}></button>
+        <button className={classes.addToCartButton} onClick={()=>addToCart(product, quantity)}></button>
       </div>
     </div>
   );
