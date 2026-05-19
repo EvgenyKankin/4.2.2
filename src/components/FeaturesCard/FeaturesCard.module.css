@@ -52,23 +52,45 @@
   display:flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 16px;
+  margin-left:16px;
+  margin-right:16px;
 }
 
 .priceSection {
   display:flex;
   justify-content: space-between;
   align-items: center;
+  margin-top:16px;
+  margin-left:16px;
+  margin-right:16px;
 }
 
 .counter {
   width: 30px;
   height: 30px;
+  display:flex;
+  flex-direction: start;
+  justify-content: center;
+  align-items: center;
+
 }
 
-.addCounterButton,
-.removeCounterButton {
+.plusButton,
+.minusButton {
   width:30px;
   height:30px;
+  cursor: pointer;
+  border:none;
+  background-color: #FFFFFF;
+}
+
+.plusButton {
+  background-image: url('./src/assets/plusButton.svg');
+}
+
+.minusButton {
+  background-image: url('./src/assets/minusButton.svg');
 }
 
 .addToCartButton {
@@ -77,4 +99,20 @@
   height:44px;
   border:none;
   border-radius: 8px;
+  cursor: pointer;
+}
+
+.counterContainer {
+  display:flex;
+  flex-direction: start;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleText {
+  display:flex;
+  flex-direction: start;
+  width:105px;
+  height:28px;
+  justify-content: space-between;
 }

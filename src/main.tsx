@@ -6,7 +6,11 @@ import { MantineProvider } from '@mantine/core'
 import './reset.css'
 
 createRoot(document.getElementById('root')!).render(
-  <MantineProvider>
+  <MantineProvider
+    theme={{
+    fontFamily: 'Inter, sans-serif',
+    }}
+  >
     <App />
   </MantineProvider>,
 )
