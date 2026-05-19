@@ -1,8 +1,8 @@
 
 
-function addToCart(title:string) {
+function addToCart(product:{id:number}, count:number) {
     return (
-        alert(title)
+        alert(product.id-count)
     )
 }
 
