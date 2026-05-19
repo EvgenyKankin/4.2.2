@@ -36,7 +36,7 @@ export function FeaturesCard({image, name, price}:ProductCardProps) {
       
       <div className={classes.priceSection}>
         <p className={classes.price}>$ {price}</p>
-        <button className={classes.addToCartButton} onClick={()=>addToCart(count, title)}></button>
+        <button className={classes.addToCartButton} onClick={()=>addToCart(title)}></button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 
 
-function addToCart(count:number, title:string) {
+function addToCart(title:string) {
     return (
         alert(title)
     )
