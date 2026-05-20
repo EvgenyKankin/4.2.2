@@ -1,5 +1,5 @@
-import { useCart } from '../addToCart/addToCart';
-import classes from './FeaturesCard.module.css';
+import { useCart } from '../../context/CartContext/CartContext';
+import classes from './ProductCard.module.css';
 import {useState} from 'react';
 
 export type Product = {

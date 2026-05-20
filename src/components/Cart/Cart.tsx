@@ -1,32 +1,73 @@
-import { useCart } from '../addToCart/addToCart'
+import { useCart } from '../../context/CartContext/CartContext';
+import classes from './Cart.module.css';
 
 type CartProps = {
-    onClose : () => void;
-    opened : boolean;
-}
+  opened: boolean;
+  onClose: () => void;
+};
 
-function Cart({opened, onClose}: CartProps) {
+function Cart({ opened, onClose }: CartProps) {
+  const { cart, increaseQuantity, decreaseQuantity } = useCart();
 
-    const {cart} = useCart();
+  if (!opened) return null;
 
-    if (!opened) return null;
-    
-    return (
-        <div>
-            <button onClick = {onClose}>Close</button>
-            <h2>Cart</h2>
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,0);
 
-            {cart.length === 0 ? (<p>Корзина пустая</p>) : (
-                cart.map((item)=> (<div key={item.id}>
-                                    <img src={item.image} width={50} />
-                                    <p>{item.name}</p>
-                                    <p>Количество: {item.quantity}</p>
-                                    <p>Цена: {item.price * item.quantity}</p>
-                                    </div>)))
-            }
+  return (
+    <div className={classes.overlay} onClick={onClose}>
+      <div
+        className={classes.cartModal}
+        onClick={(event) => event.stopPropagation()}
+      >
+        {cart.length === 0 ? (
+          <div className={classes.empty}>
+            <img src='./src/assets/cartEmpty.svg' className={classes.emptyImg}/>
+            <p className={classes.emptyText}>Ваша корзина пустая</p>
+          </div>
+        ) : (
+          <>
+            {cart.map((item) => {
+              const [title, details] = item.name.split(' - ');
+              const [, unit] = details.split(' ');
 
-        </div>
-    )
+              return (
+                <div className={classes.cartItem} key={item.id}>
+                  <img
+                    className={classes.image}
+                    src={item.image}
+                    alt={title}
+                  />
+
+                  <div className={classes.info}>
+                    <div className={classes.titleRow}>
+                      <span className={classes.title}>{title}</span>
+                      <span className={classes.unit}>1 {unit}</span>
+                    </div>
+
+                    <div className={classes.price}>$ {item.price}</div>
+                  </div>
+
+                  <div className={classes.counter}>
+                    <button className={classes.minusButton} onClick={() => decreaseQuantity(item.id)}></button>
+                    <span className={classes.quantity}>
+                      {item.quantity}
+                    </span>
+                    <button className={classes.plusButton} onClick={() => increaseQuantity(item.id)}></button>
+                  </div>
+                </div>
+              );
+            })}
+
+            <div className={classes.total}>
+              <span>Total</span>
+              <span>$ {totalPrice}</span>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Cart;

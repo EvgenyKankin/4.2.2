@@ -1,7 +1,7 @@
-import { FeaturesCard } from '../FeaturesCard/FeaturesCard';
+import { FeaturesCard } from '../ProductCard/ProductCard';
 import LoaderList from '../LoaderList/LoaderList';
 import classes from './ProductsList.module.css'
-import { useProducts } from '../ProductsContext/ProductsContext'
+import { useProducts } from '../../context/ProductsContext/ProductsContext'
 
 function ProductsList() {
     const {products, isLoading, error} = useProducts();

@@ -5,7 +5,6 @@ type FeaturesCardProps = {
   children: ReactNode;
 };
 
-
 function Container({children}:FeaturesCardProps) {
     return (
         <div className={classes.container}>

@@ -3,13 +3,16 @@ import './index.css'
 import App from './App.tsx'
 import '@mantine/core/styles.css'
 import './reset.css'
-import { ProductsProvider } from './components/ProductsContext/ProductsContext.tsx'
-import { CartProvider } from './components/addToCart/addToCart.tsx'
+import { ProductsProvider } from './context/ProductsContext/ProductsContext.tsx'
+import { CartProvider } from './context/CartContext/CartContext.tsx'
+import { MantineProvider } from '@mantine/core'
 
 createRoot(document.getElementById('root')!).render(
-  <ProductsProvider>
-    <CartProvider>
-      <App />
-    </CartProvider>
-  </ProductsProvider>,
+  <MantineProvider>
+    <ProductsProvider>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </ProductsProvider>
+  </MantineProvider>,
 )
