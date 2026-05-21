@@ -2,6 +2,7 @@ import { useCart } from '../../context/CartContext/CartContext';
 import classes from './ProductCard.module.css';
 import {useState} from 'react';
 
+
 export type Product = {
   id : number
   name: string;

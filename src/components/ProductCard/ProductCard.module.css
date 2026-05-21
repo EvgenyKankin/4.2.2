@@ -69,15 +69,15 @@
 }
 
 .plusButton {
-  background-image: url('./src/assets/plusButton.svg');
+  background-image: url('../../assets/plusButton.svg');
 }
 
 .minusButton {
-  background-image: url('./src/assets/minusButton.svg');
+  background-image: url('../../assets/minusButton.svg');
 }
 
 .addToCartButton {
-  background-image: url('./src/assets/addToCart.svg');
+  background-image: url('../../assets/addToCart.svg');
   width:204px;
   height:44px;
   border:none;

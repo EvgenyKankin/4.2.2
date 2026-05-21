@@ -10,7 +10,7 @@ describe ('ProductsList', function() {
                             json: ()=> Promise.resolve([{id: 1,
                                                         name: 'Cauliflower - 1 Kg',
                                                         price: 60,
-                                                        image: 'cauliflower.png',
+                                                        image: '',
                                                         category: 'vegetables',}])})))
     
     renderWithProviders(<ProductsList />)

@@ -2,6 +2,7 @@ import classes from './Header.module.css';
 import { useState } from 'react'
 import Cart from '../Cart/Cart';
 import { useCart } from '../../context/CartContext/CartContext';
+import cartImg from "../../assets/logo.svg";
 
 function Header() {
     
@@ -11,7 +12,7 @@ function Header() {
 
     return (
         <header className={classes.header}>
-            <img src="./src/assets/logo.svg" className={classes.logo} />
+            <img src={cartImg} className={classes.logo} />
             <button className={(totalItems > 0) ? (classes.cartButtonLong) 
                                                 : (classes.cartButton)} 
                     onClick = {() => setIsCartOpen(true)}

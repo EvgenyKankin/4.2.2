@@ -1,5 +1,6 @@
 import { useCart } from '../../context/CartContext/CartContext';
 import classes from './Cart.module.css';
+import cartEmptyImg from '../../assets/cartEmpty.svg';
 
 type CartProps = {
   opened: boolean;
@@ -22,7 +23,7 @@ function Cart({ opened, onClose }: CartProps) {
       >
         {cart.length === 0 ? (
           <div className={classes.empty}>
-            <img src='./src/assets/cartEmpty.svg' className={classes.emptyImg}/>
+            <img src={cartEmptyImg} className={classes.emptyImg}/>
             <p className={classes.emptyText}>Ваша корзина пустая</p>
           </div>
         ) : (
