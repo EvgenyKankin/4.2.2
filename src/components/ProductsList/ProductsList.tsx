@@ -1,13 +1,19 @@
 import { ProductCard } from '../ProductCard/ProductCard';
-import LoaderList from '../LoaderList/LoaderList';
 import classes from './ProductsList.module.css'
 import { useProducts } from '../../context/ProductsContext/ProductsContext'
+import LoaderCard from '../LoaderCard/LoaderCard';
 
 function ProductsList() {
     const {products, isLoading, error} = useProducts();
 
     if (isLoading) {
-    return <LoaderList />
+        return (
+            <div className = {classes.cardContainer}>
+                {Array.from({ length: 8 }).map((_) => (
+                    <LoaderCard />
+                ))}
+            </div>
+        )
     }
 
     if (error) {
