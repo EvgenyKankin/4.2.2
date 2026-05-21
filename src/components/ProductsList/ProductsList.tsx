@@ -1,4 +1,4 @@
-import { FeaturesCard } from '../ProductCard/ProductCard';
+import { ProductCard } from '../ProductCard/ProductCard';
 import LoaderList from '../LoaderList/LoaderList';
 import classes from './ProductsList.module.css'
 import { useProducts } from '../../context/ProductsContext/ProductsContext'
@@ -17,7 +17,7 @@ function ProductsList() {
     return (
         <div className = {classes.cardContainer}>
             {products.map((product) => (
-                <FeaturesCard
+                <ProductCard
                     key={product.id}
                     product={product}
                 />

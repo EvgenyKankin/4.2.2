@@ -14,7 +14,7 @@ type ProductCardProps = {
   product : Product;
 }
 
-export function FeaturesCard({product, }:ProductCardProps) {
+export function ProductCard({product, }:ProductCardProps) {
   
   const [title, details] = (product.name || '').split (' - ');
   const [quant, unit] = (details || '').split (' ');
@@ -43,7 +43,7 @@ export function FeaturesCard({product, }:ProductCardProps) {
       
       <div className={classes.priceSection}>
         <p className={classes.price}>$ {product.price}</p>
-        <button className={classes.addToCartButton} onClick={()=>addToCart(product, quantity)}></button>
+        <button className={classes.addToCartButton} aria-label='add to cart' onClick={()=>addToCart(product, quantity)}></button>
       </div>
     </div>
   );
