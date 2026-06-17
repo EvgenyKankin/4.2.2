@@ -1,4 +1,4 @@
-2.3.2 Vegetables shop
+4.2.2 Vegetables shop
 
 deploy: 
-https://evgenykankin.github.io/2.3.2/
+https://evgenykankin.github.io/4.2.2/
