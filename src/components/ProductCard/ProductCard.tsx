@@ -36,9 +36,9 @@ export function ProductCard({product, }:ProductCardProps) {
         </div>
 
         <div className={classes.counterContainer}>
-          <button className ={classes.plusButton} onClick={()=>setQuantity((prev)=>(prev + 1))}></button>
-          <div className={classes.counter}>{quantity}</div>
-          <button className ={classes.minusButton} onClick={()=>setQuantity((prev)=>(prev > 1 ? prev - 1 : 1))}></button>
+          <button className ={classes.plusButton} aria-label='plus' onClick={()=>setQuantity((prev)=>(prev + 1))}></button>
+          <div className={classes.counter} data-testid="counter">{quantity}</div>
+          <button className ={classes.minusButton} aria-label='minus' onClick={()=>setQuantity((prev)=>(prev > 1 ? prev - 1 : 1))}></button>
         </div>
       </div>
       

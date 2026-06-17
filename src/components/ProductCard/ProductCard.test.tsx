@@ -1,24 +1,68 @@
-import { describe, it, expect } from "vitest";
+import { beforeEach, describe, it, expect } from 'vitest';
 import { ProductCard } from './ProductCard';
-import renderWithProviders from "../../test/test-utils";
-import { screen } from "@testing-library/react";
+import renderWithProviders from '../../test/test-utils';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-describe ('Работа с карточкой товара', function() {
-    it('Добавление товара в корзину', async() => {
-        const product = {id: 1,
-                        name: 'Cauliflower - 1 Kg',
-                        price: 60,
-                        image: 'cauliflower.png',
-                        category: 'vegetables',
-                        };
-        
-        const user = userEvent.setup();
+describe('Работа с карточкой товара', () => {
+  const product = {
+    id: 1,
+    name: 'Cauliflower - 1 Kg',
+    price: 60,
+    image: 'cauliflower.png',
+    category: 'vegetables',
+  };
 
-        renderWithProviders(<ProductCard product={product} />)
+  beforeEach(() => {
+    localStorage.clear();
+  });
 
-        await user.click(screen.getByRole('button', {name: /add to cart/i}));
+  it('Добавление товара в корзину', async () => {
+    const user = userEvent.setup();
 
-        expect(localStorage.getItem('cart')).toContain('Cauliflower');
-    });
+    renderWithProviders(<ProductCard product={product} />);
+
+    await user.click(screen.getByRole('button', { name: /add to cart/i }));
+
+    expect(localStorage.getItem('cart')).toContain('Cauliflower');
+  });
+
+  it('Увеличение количества товара в карточке', async () => {
+    const user = userEvent.setup();
+
+    renderWithProviders(<ProductCard product={product} />);
+
+    const plusButton = screen.getByRole('button', { name: /plus/i });
+
+    await user.click(plusButton);
+
+    expect(screen.getByText('2')).toBeInTheDocument();
+  });
+
+  it('Уменьшение количества товара в карточке', async () => {
+    const user = userEvent.setup();
+
+    renderWithProviders(<ProductCard product={product} />);
+
+    const plusButton = screen.getByRole('button', { name: /plus/i });
+    const minusButton = screen.getByRole('button', { name: /minus/i });
+
+    await user.click(plusButton);
+    await user.click(minusButton);
+
+    expect(screen.getByTestId('counter')).toHaveTextContent('1');
+  });
+
+  it('Количество товара не уменьшается меньше 1', async () => {
+    const user = userEvent.setup();
+
+    renderWithProviders(<ProductCard product={product} />);
+
+    const minusButton = screen.getByRole('button', { name: /minus/i });
+
+    await user.click(minusButton);
+    await user.click(minusButton);
+
+    expect(screen.getByTestId('counter')).toHaveTextContent('1');
+  });
 });

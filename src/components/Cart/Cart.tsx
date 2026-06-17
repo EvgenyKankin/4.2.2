@@ -50,11 +50,11 @@ function Cart({ opened, onClose }: CartProps) {
                   </div>
 
                   <div className={classes.counter}>
-                    <button className={classes.minusButton} onClick={() => decreaseQuantity(item.id)}></button>
-                    <span className={classes.quantity}>
+                    <button className={classes.minusButton} aria-label={`decrease ${title}`} onClick={() => decreaseQuantity(item.id)}></button>
+                    <span className={classes.quantity} data-testid={`cart-quantity-${item.id}`}>
                       {item.quantity}
                     </span>
-                    <button className={classes.plusButton} onClick={() => increaseQuantity(item.id)}></button>
+                    <button className={classes.plusButton} aria-label={`increase ${title}`} onClick={() => increaseQuantity(item.id)}></button>
                   </div>
                 </div>
               );
@@ -62,7 +62,7 @@ function Cart({ opened, onClose }: CartProps) {
 
             <div className={classes.total}>
               <span>Total</span>
-              <span>$ {totalPrice}</span>
+              <span data-testid="cart-total">$ {totalPrice}</span>
             </div>
           </>
         )}
