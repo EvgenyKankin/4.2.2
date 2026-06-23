@@ -1,23 +1,27 @@
 import { render } from '@testing-library/react';
-import { CartProvider } from '../context/CartContext/CartContext';
-import { ProductsProvider } from '../context/ProductsContext/ProductsContext';
 import { MantineProvider } from '@mantine/core';
-import type { ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { store } from '../features/store';
+import type { ReactNode } from 'react';
+import { configureStore } from '@reduxjs/toolkit';
+
+import productsReducer from '../features/productsSlice';
+import cartReducer from '../features/cartSlice';
 
 function renderWithProviders(ui: ReactNode) {
-    return render (
-        <Provider store={store}>
-            <MantineProvider>
-                <ProductsProvider>
-                    <CartProvider>
-                        {ui}
-                    </CartProvider>
-                </ProductsProvider>
-            </MantineProvider>
-        </Provider>
-    )
+  const testStore = configureStore({
+    reducer: {
+      products: productsReducer,
+      cart: cartReducer,
+    },
+  });
+
+  return render(
+    <Provider store={testStore}>
+      <MantineProvider>
+        {ui}
+      </MantineProvider>
+    </Provider>
+  );
 }
 
 export default renderWithProviders;

@@ -3,6 +3,7 @@ import { ProductCard } from './ProductCard';
 import renderWithProviders from '../../test/test-utils';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import Cart from '../Cart/Cart';
 
 describe('Работа с карточкой товара', () => {
   const product = {
@@ -20,11 +21,22 @@ describe('Работа с карточкой товара', () => {
   it('Добавление товара в корзину', async () => {
     const user = userEvent.setup();
 
-    renderWithProviders(<ProductCard product={product} />);
+    renderWithProviders(
+      <>
+        <ProductCard product={product} />
+        <Cart opened={true} onClose={() => {}} />
+      </>
+    );
 
-    await user.click(screen.getByRole('button', { name: /add to cart/i }));
+    await user.click(
+      screen.getByRole('button', { name: /add to cart/i })
+    );
 
-    expect(localStorage.getItem('cart')).toContain('Cauliflower');
+    expect(screen.getByTestId('cart-quantity-1'))
+      .toHaveTextContent('1');
+
+    expect(screen.getByTestId('cart-total'))
+      .toHaveTextContent('$ 60');
   });
 
   it('Увеличение количества товара в карточке', async () => {
