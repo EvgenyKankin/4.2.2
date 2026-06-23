@@ -2,16 +2,14 @@ import { useEffect } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
 import LoaderCard from '../LoaderCard/LoaderCard';
 import classes from './ProductsList.module.css';
-
 import { fetchProducts } from '../../features/productsSlice';
 import { useAppDispatch, useAppSelector } from '../../features/hooks';
+import { selectProductsState } from '../../features/productsSlice';
 
 function ProductsList() {
   const dispatch = useAppDispatch();
 
-  const { products, isLoading, error } = useAppSelector(
-    (state) => state.products
-  );
+  const { products, isLoading, error } = useAppSelector(selectProductsState);
 
   useEffect(() => {
     dispatch(fetchProducts());

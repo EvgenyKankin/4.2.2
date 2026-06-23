@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type {Product} from '../components/ProductCard/ProductCard'
+import type { RootState } from './store';
 
 type ProductsState = {
   products: Product[];
@@ -12,6 +13,8 @@ const initialState: ProductsState = {
   isLoading: false,
   error: null,
 };
+
+export const selectProductsState = (state: RootState) => state.products;
 
 export const fetchProducts = createAsyncThunk<
   Product[],

@@ -1,4 +1,5 @@
-import { useCart } from '../../context/CartContext/CartContext';
+import { useAppDispatch, useAppSelector } from '../../features/hooks';
+import { decreaseQuantity, increaseQuantity, selectCart } from '../../features/cartSlice';
 import classes from './Cart.module.css';
 import cartEmptyImg from '../../assets/cartEmpty.svg';
 
@@ -8,12 +9,15 @@ type CartProps = {
 };
 
 function Cart({ opened, onClose }: CartProps) {
-  const { cart, increaseQuantity, decreaseQuantity } = useCart();
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector(selectCart);
 
   if (!opened) return null;
 
   const totalPrice = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,0);
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
     <div className={classes.overlay} onClick={onClose}>
@@ -23,14 +27,14 @@ function Cart({ opened, onClose }: CartProps) {
       >
         {cart.length === 0 ? (
           <div className={classes.empty}>
-            <img src={cartEmptyImg} className={classes.emptyImg}/>
+            <img src={cartEmptyImg} className={classes.emptyImg} />
             <p className={classes.emptyText}>Ваша корзина пустая</p>
           </div>
         ) : (
           <>
             {cart.map((item) => {
-              const [title, details] = item.name.split(' - ');
-              const [, unit] = details.split(' ');
+              const [title, details = ''] = item.name.split(' - ');
+              const [, unit = ''] = details.split(' ');
 
               return (
                 <div className={classes.cartItem} key={item.id}>
@@ -50,11 +54,24 @@ function Cart({ opened, onClose }: CartProps) {
                   </div>
 
                   <div className={classes.counter}>
-                    <button className={classes.minusButton} aria-label={`decrease ${title}`} onClick={() => decreaseQuantity(item.id)}></button>
-                    <span className={classes.quantity} data-testid={`cart-quantity-${item.id}`}>
+                    <button
+                      className={classes.minusButton}
+                      aria-label={`decrease ${title}`}
+                      onClick={() => dispatch(decreaseQuantity(item.id))}
+                    />
+
+                    <span
+                      className={classes.quantity}
+                      data-testid={`cart-quantity-${item.id}`}
+                    >
                       {item.quantity}
                     </span>
-                    <button className={classes.plusButton} aria-label={`increase ${title}`} onClick={() => increaseQuantity(item.id)}></button>
+
+                    <button
+                      className={classes.plusButton}
+                      aria-label={`increase ${title}`}
+                      onClick={() => dispatch(increaseQuantity(item.id))}
+                    />
                   </div>
                 </div>
               );
